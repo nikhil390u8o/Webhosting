@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}{% block body %}
+<h2>Dashboard</h2>
+<form method="post" action="{{ url_for('deploy') }}">
+  <input name="repo_url" placeholder="https://github.com/user/repo.git" style="width:70%">
+  <button type="submit">Deploy</button>
+</form>
+<h3>Your Projects</h3>
+<ul>
+{% for p in projects %}
+  <li>
+    <strong>{{ p[2] }}</strong> - <a href="{{ url_for('serve_site_index', name=p[2]) }}">Visit</a> |
+    <a href="{{ url_for('redeploy', name=p[2]) }}">Re-deploy</a>
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}
