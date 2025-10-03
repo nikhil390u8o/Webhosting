@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title or 'Mini Vercel' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<style>
+body {
+  background: #0a0a0a;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+}
+h1, h2, h3 {
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+}
+a, p, span {
+  color: #e0e0e0;
+}
+button {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #ff00ff;
+  color: black;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+.card, .box {
+  background: #111;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99 inset;
+}
+nav, header, footer {
+  background: #111;
+  color: #00f7ff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px #00f7ff;
+}
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><a href="{{ url_for('index') }}">Mini Vercel</a></div>
+  <div class="right">
+    {% if session.get('user') %}
+      Hello {{ session.user.username }} | <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Sign in with GitHub</a>
+    {% endif %}
+  </div>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}
+</main>
+</body>
+</html>
