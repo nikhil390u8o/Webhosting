@@ -1,0 +1,54 @@
+/* Global Styles */
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    background: #0b0d0f;
+    color: #e6eef8;
+    margin: 0;
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #111;
+    border-bottom: 1px solid #222;
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 10px;
+}
+
+/* Links */
+a {
+    color: #2ee6a7;
+}
+
+/* Input Fields */
+input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #222;
+    background: #081018;
+    color: #dfeffb;
+}
+
+/* Buttons */
+button {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 0;
+    background: #2ee6a7;
+    color: #002;
+}
+
+/* Flash Messages */
+.flash {
+    background: #133;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
