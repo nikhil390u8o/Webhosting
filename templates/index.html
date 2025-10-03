@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Vercel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .neon-text {
+      text-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 30px #0ff;
+    }
+    .neon-btn {
+      box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+  </style>
+
+<style>
+body {
+  background: #0a0a0a;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+}
+h1, h2, h3 {
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+}
+a, p, span {
+  color: #e0e0e0;
+}
+button {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #ff00ff;
+  color: black;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+.card, .box {
+  background: #111;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99 inset;
+}
+nav, header, footer {
+  background: #111;
+  color: #00f7ff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px #00f7ff;
+}
+</style>
+
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex flex-col">
+
+  <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800">
+    <h1 class="text-2xl font-bold neon-text">⚡ Mini Vercel</h1>
+    <a href="#" class="px-4 py-2 bg-blue-500 text-black rounded neon-btn hover:bg-blue-400">
+      Sign in with GitHub
+    </a>
+  </nav>
+
+  <section class="text-center mt-10">
+    <h2 class="text-4xl font-extrabold neon-text">Deploy Static Sites Instantly</h2>
+    <p class="text-gray-400 mt-2">From GitHub or Upload your ZIP file</p>
+  </section>
+
+  <section class="flex justify-center mt-10">
+    <form action="{{ url_for('upload_site') }}" method="POST" enctype="multipart/form-data"
+          class="bg-gray-900 p-6 rounded-lg shadow-lg neon-btn w-96">
+      <label class="block mb-2">Upload ZIP File</label>
+      <input type="file" name="zipfile"
+        class="w-full p-2 mb-4 rounded bg-black border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"/>
+      <button type="submit" class="w-full py-3 rounded bg-green-500 text-black font-bold neon-btn hover:bg-green-400">
+        🚀 Deploy
+      </button>
+    </form>
+  </section>
+
+  <section class="mt-12 px-6">
+    <h3 class="text-2xl font-bold mb-4 neon-text">🌐 Your Sites</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for site in sites %}
+      <div class="p-4 bg-gray-800 rounded-lg shadow-md border border-gray-700 neon-btn">
+        <h4 class="text-xl font-bold">{{ site }}</h4>
+        <a href="{{ url_for('serve_site_index', site=site) }}" target="_blank"
+           class="text-blue-400 underline hover:text-blue-300">Open Site</a>
+      </div>
+      {% else %}
+      <p class="text-gray-500">No sites deployed yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+</body>
+</html>
+
